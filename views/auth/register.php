@@ -13,7 +13,7 @@ var_dump($_POST);
 
 <!-- html -->
 <div class="container">
-    <form action="<?= URL ?>/src/Controller/UserController.php?param=ajouter_user" method="post">
+    <form action="<?= URL ?>/src/Controller/AuthController.php?param=register" method="post">
 
         <div class="mb-3">
             <label for="nom" class="form-label">Nom</label>
