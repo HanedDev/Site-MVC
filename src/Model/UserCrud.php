@@ -65,6 +65,20 @@ class UserCrud
             return $result;
     }
 
+    public function findByEmail ($email){       
+        $sql = "SELECT * FROM user WHERE email = '$email'";
+        $stmt = $this->cbd->getConnect()->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        return $result;
+}
+
+// public function findByRole ($role){       
+//     $sql = "SELECT * FROM user WHERE email = Admin";
+//     $stmt = $this->cbd->getConnect()->query($sql);
+//     $result = $stmt->fetch(PDO::FETCH_OBJ);
+//     return $result;
+// }
+
 //*****************UPDATE***************************************/
 
     public function edit ($id, $post){

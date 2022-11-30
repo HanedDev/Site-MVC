@@ -7,16 +7,27 @@ include_once ROOT . 'views/include/header.php';
 
 include_once ROOT . 'views/include/navbar.php';
 
+foreach ($errors as $message){
+    echo '<p> . $message . </p>';
+}
 
 var_dump($_POST);
 ?>
 
 <!-- html -->
 <div class="container">
+    <div>
+        <?php
+            foreach($errors as $message) :?>
+     <div class="alert alert-danger" role="alert">
+       <?= $message ?>
+     </div>
+            <?php endforeach ?>
+    </div>
     <form action="<?= URL ?>/src/Controller/AuthController.php?param=register" method="post">
 
         <div class="mb-3">
-            <label for="nom" class="form-label">Nom</label>
+            <label for="nom" class="form-label">Nom</label> 
             <input type="text" class="form-control" id="nom" name="nom">
         </div>
 

@@ -14,9 +14,26 @@ include_once $path . '/init.php';
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../index.php?yt=654&io=000">Home</a>
+          <a class="nav-link active" aria-current="page" href="<?= URL ?>/index.php">Home</a>
         </li>
+       
+
+        <?php if (!isset($_SESSION['user'])) : ?>
         <li class="nav-item">
+          <a class="nav-link" href="<?= URL ?>/src/Controller/AuthController.php?param=register">register</a>
+        </li>
+
+        
+     
+          <a href="<?= URL ?>/src/Controller/AuthController.php?param=login" class="btn btn-primary mx-2">Login </a>
+
+          <?php else : ?> 
+
+          <a href="<?= URL ?>/src/Controller/AuthController.php?param=logout" class="btn btn-primary">Logout</a>
+
+          <?php if ($_SESSION['user']->role === 'Admin') : ?>
+
+          <li class="nav-item">
           <a class="nav-link" href="<?= URL ?>/src/Controller/UserController.php?param=liste_user">List users</a>
         </li>
         
@@ -24,29 +41,16 @@ include_once $path . '/init.php';
           <a class="nav-link" href="<?= URL ?>/src/Controller/XpController.php?param=liste_xp">Liste Xp</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= URL ?>/src/Controller/AuthController.php?param=register">register</a>
-        </li>
+        <?php endif ?>
+      
+          
+          <?php endif ?>
+      
         
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
+      <!-- <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> -->
     </div>
   </div>
 </nav>

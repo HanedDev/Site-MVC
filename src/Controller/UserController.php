@@ -10,6 +10,7 @@ include_once $path . '/src/Autoload.php';
 
 
 Autoload::register();
+verif_role('Admin');
 
 if($_GET['param']){
     $param = $_GET['param'];
@@ -33,7 +34,7 @@ switch($param) {
             $_POST['password'] =$mdp_hash;
             // var_dump($_POST);    
             $userCrud->addUser($_POST);
-            header("location: UserController.php?param=liste_user");
+            header("location: URL . UserController.php?param=liste_user");
         }
     include_once ROOT . 'views/user/ajouterUser.php';
 
@@ -41,10 +42,31 @@ switch($param) {
 
 
     case 'delete_user':
+        if(isset($_SESSION['user']) AND $_SESSION['user']-> role === 'Admin'){
+            $id = $_GET ['id'];
+            $users = $userCrud->delete($id);
+            header("location:  URL . UserController.php?param=liste_user");
+        }else{
+            $url= URL . 'index.php';
+            header ("location : $url");
+        }
+        
 
-        $id = $_GET ['id'];
-        $users = $userCrud->delete($id);
-        header("location: UserController.php?param=liste_user");
+
+        // if($_POST){
+            
+        //     $user = $userCrud->findByRole($role);
+        //     if ($role = Admin){
+        //         $users = $userCrud->delete($id);
+                 
+
+               
+        //     } else{
+        //         $errors[] ='email ou password non valide';
+        //     }
+        // }
+
+
 
         break;
 
